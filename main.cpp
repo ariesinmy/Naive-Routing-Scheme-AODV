@@ -10,11 +10,11 @@ class node{
 	public:
 		unsigned int sendTo(int dstID); //return next node
 		void bulid_routingTable(int distance[], vector< list<int> > AdjList, int nodeCnt);
-		unsigned int id; //¸Ó¸`ÂIªºID
+		unsigned int id; //è©²ç¯€é»çš„ID
 		void printRoutingTable(int nodeCnt);
 		
 	private: 
-		unsigned int routingTable[100]; //¨C­ÓÂIªºrouting table 
+		unsigned int routingTable[100]; //æ¯å€‹é»çš„routing table 
 		
 };
 
@@ -37,19 +37,19 @@ void node::bulid_routingTable(int distance[], vector< list<int> > AdjList, int n
 		else if(1 == distance[i]){
 			routingTable[i] = i; 
 		}
-		//¦pªG¦³order¤@¼ËªºID¡A§äID½s¸¹³Ì¤pªº 
+		//å¦‚æœæœ‰orderä¸€æ¨£çš„IDï¼Œæ‰¾IDç·¨è™Ÿæœ€å°çš„ 
 		else if(1 < distance[i]){
 			int dist = distance[i], tmp = i;
 			while(1 < dist){
 				dist--;
 				for(j=0; j<nodeCnt; j++){
 					if(distance[j] == dist){
-						//§PÂ_ j ¦³¨S¦³¦b tmp ªº AdjList ¤¤
+						//åˆ¤æ–· j æœ‰æ²’æœ‰åœ¨ tmp çš„ AdjList ä¸­
 						for(itr = AdjList[tmp].begin(); itr != AdjList[tmp].end(); itr++){  
-							if(*itr == j){ flag = 1; break; } //°µ­Ó°O¸¹¡Abreak¥X¨Ó 
+							if(*itr == j){ flag = 1; break; } //åšå€‹è¨˜è™Ÿï¼Œbreakå‡ºä¾† 
 						}
 					}
-					if(flag == 1) break;  //¦pªGflag¬°1¡Aªí¥Üj¦³¦btmpªºAdjList¤¤ 
+					if(flag == 1) break;  //å¦‚æœflagç‚º1ï¼Œè¡¨ç¤ºjæœ‰åœ¨tmpçš„AdjListä¸­ 
 				}flag = 0;
 				tmp = j;
 			}
@@ -73,9 +73,9 @@ class Graph{
     Graph(int nodeCnt);								// constructor with input: number of vertex
     void AddEdgeList(int node1, int node2);
     void BFS(int Start);
-		int *color,             // 0:¥Õ¦â(¨S§ä¹L), 1:¦Ç¦â(³Q§ä¹L), 2:¶Â¦â(queue.pop)
-        *distance,          // 0:°_ÂI, µL­­¤j:±q°_ÂI¨«¤£¨ìªºvertex
-        *predecessor;       // -1:¨S¦³predecessor, ªí¥Ü¬°°_ÂIvertex
+		int *color,             // 0:ç™½è‰²(æ²’æ‰¾é), 1:ç°è‰²(è¢«æ‰¾é), 2:é»‘è‰²(queue.pop)
+        *distance,          // 0:èµ·é», ç„¡é™å¤§:å¾èµ·é»èµ°ä¸åˆ°çš„vertex
+        *predecessor;       // -1:æ²’æœ‰predecessor, è¡¨ç¤ºç‚ºèµ·é»vertex
     vector< list<int> > AdjList;
 		void displayAdjList();
 		
@@ -102,37 +102,37 @@ void Graph::BFS(int Start)
     predecessor = new int[num_vertex];
     distance = new int[num_vertex];
 
-    for (int i = 0; i < num_vertex; i++) {  // ªì©l¤Æ
-        color[i] = 0;                       // 0:¥Õ¦â;
-        predecessor[i] = -1;                // -1ªí¥Ü¨S¦³predecessor
-        distance[i] = num_vertex+1;         // num_vertex­Óvertex, 
-    }                                       // ³Ìªø¶ZÂ÷ distance = num_vertex -1±øedge
+    for (int i = 0; i < num_vertex; i++) {  // åˆå§‹åŒ–
+        color[i] = 0;                       // 0:ç™½è‰²;
+        predecessor[i] = -1;                // -1è¡¨ç¤ºæ²’æœ‰predecessor
+        distance[i] = num_vertex+1;         // num_vertexå€‹vertex, 
+    }                                       // æœ€é•·è·é›¢ distance = num_vertex -1æ¢edge
 
     queue<int> q;
     int i = Start;
 
-    for (int j = 0; j < num_vertex; j++) {  // j±q0¼Æ¨ìnum_vertex-1, ¦]¦¹j·|¨«¹Lgraph¤¤©Ò¦³vertex
-        if (color[i] == 0) {                // ²Ä¤@¦¸i·|¬O°_ÂIvertex, ¦p¹Ï¤G(c)
-            color[i] = 1;                   // 1:¦Ç¦â
-            distance[i] = 0;                // ¨C¤@­Óconnected componentªº°_ÂI¤§¶ZÂ÷³]¦¨0
-            predecessor[i] = -1;            // ¨C¤@­Óconnected componentªº°_ÂI¨S¦³predecessor
+    for (int j = 0; j < num_vertex; j++) {  // jå¾0æ•¸åˆ°num_vertex-1, å› æ­¤jæœƒèµ°égraphä¸­æ‰€æœ‰vertex
+        if (color[i] == 0) {                // ç¬¬ä¸€æ¬¡iæœƒæ˜¯èµ·é»vertex, å¦‚åœ–äºŒ(c)
+            color[i] = 1;                   // 1:ç°è‰²
+            distance[i] = 0;                // æ¯ä¸€å€‹connected componentçš„èµ·é»ä¹‹è·é›¢è¨­æˆ0
+            predecessor[i] = -1;            // æ¯ä¸€å€‹connected componentçš„èµ·é»æ²’æœ‰predecessor
             q.push(i);
             while (!q.empty()) {
-                int u = q.front();                  // u ¬°·sªº·j´M°_ÂI
-                for (list<int>::iterator itr = AdjList[u].begin(); itr != AdjList[u].end(); itr++) {                         // ¤À¦¨¨â¬q
-                    if (color[*itr] == 0) {                // ­Y³Q¡u§ä¨ì¡vªºvertex¬O¥Õ¦â
-                        color[*itr] = 1;                   // ¶î¦¨¦Ç¦â, ªí¥Ü¤w¸g³Q¡u§ä¨ì¡v
-                        distance[*itr] = distance[u] + 1;  // ¶ZÂ÷¬Opredecessor¤§¶ZÂ÷¥[¤@
-                        predecessor[*itr] = u;             // §ó·s³Q¡u§ä¨ì¡vªºvertexªºpredecessor
-                        q.push(*itr);                      // §âvertex±À¶iqueue
+                int u = q.front();                  // u ç‚ºæ–°çš„æœå°‹èµ·é»
+                for (list<int>::iterator itr = AdjList[u].begin(); itr != AdjList[u].end(); itr++) {                         // åˆ†æˆå…©æ®µ
+                    if (color[*itr] == 0) {                // è‹¥è¢«ã€Œæ‰¾åˆ°ã€çš„vertexæ˜¯ç™½è‰²
+                        color[*itr] = 1;                   // å¡—æˆç°è‰², è¡¨ç¤ºå·²ç¶“è¢«ã€Œæ‰¾åˆ°ã€
+                        distance[*itr] = distance[u] + 1;  // è·é›¢æ˜¯predecessorä¹‹è·é›¢åŠ ä¸€
+                        predecessor[*itr] = u;             // æ›´æ–°è¢«ã€Œæ‰¾åˆ°ã€çš„vertexçš„predecessor
+                        q.push(*itr);                      // æŠŠvertexæ¨é€²queue
                     }
                 }
-                q.pop();        // §âu²¾¥Xqueue
-                color[u] = 2;   // ¨Ã¥B§âu¶î¦¨¶Â¦â
+                q.pop();        // æŠŠuç§»å‡ºqueue
+                color[u] = 2;   // ä¸¦ä¸”æŠŠuå¡—æˆé»‘è‰²
             }
         }
-        // ­Y¤@¦¸¦^°é¨S¦³§â©Ò¦³vertex¨«¹L, ªí¥Ügraph¦³¦h­Óconnected component
-        // ´N§âi¥t¦¨j, Ä~ÄòÀË¬dgraph¤¤ªº¨ä¥Lvertex¬O§_¤´¬O¥Õ¦â, ­Y¬O, ­«½Æwhile loop
+        // è‹¥ä¸€æ¬¡å›åœˆæ²’æœ‰æŠŠæ‰€æœ‰vertexèµ°é, è¡¨ç¤ºgraphæœ‰å¤šå€‹connected component
+        // å°±æŠŠiå¦æˆj, ç¹¼çºŒæª¢æŸ¥graphä¸­çš„å…¶ä»–vertexæ˜¯å¦ä»æ˜¯ç™½è‰², è‹¥æ˜¯, é‡è¤‡while loop
         i = j;
     }
 }
@@ -173,11 +173,11 @@ int main()
 		cnt++;
 	}cnt = 0;
 	
-	node NodeList[nodeCnt]; //«Ø¥ßNodeList¡A¨C­Ó½s¸¹¹ïÀ³¨C­ÓNode¡A¨C­ÓNode¦³¦Û¤vªºroutingTable 
+	node NodeList[nodeCnt]; //å»ºç«‹NodeListï¼Œæ¯å€‹ç·¨è™Ÿå°æ‡‰æ¯å€‹Nodeï¼Œæ¯å€‹Nodeæœ‰è‡ªå·±çš„routingTable 
 	while(cnt < nodeCnt){
-		g1.BFS(cnt);	//¹ï¨C­ÓÂI°µBFS
-		NodeList[cnt].id = cnt;    //½á¤©¸`ÂIªºID 
-		NodeList[cnt].bulid_routingTable(g1.distance, g1.AdjList, nodeCnt); //¶Ç¤Jg1.distance¡Ag1.AdjList«Ø¥ßroutingTable
+		g1.BFS(cnt);	//å°æ¯å€‹é»åšBFS
+		NodeList[cnt].id = cnt;    //è³¦äºˆç¯€é»çš„ID 
+		NodeList[cnt].bulid_routingTable(g1.distance, g1.AdjList, nodeCnt); //å‚³å…¥g1.distanceï¼Œg1.AdjListå»ºç«‹routingTable
 		cnt++;
 	}cnt = 0;
 	
