@@ -29,4 +29,5 @@ AODV 透過發出請求(Route Request，RREQ)與回覆(Route Reply，RREP)的機
 ![image](https://user-images.githubusercontent.com/58333941/139481949-8f37e8e9-c65e-4df9-b425-e2fb68ee1dda.png)
 
 6. output 格式：
+7. 
 ![image](https://user-images.githubusercontent.com/58333941/139481988-ade50e30-31f0-49d7-907c-e22f7a8e17e1.png)
